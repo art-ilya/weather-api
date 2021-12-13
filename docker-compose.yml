@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+
+  weather-api:
+    image: weather-api
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    env_file: docker/common/dev.env
+    restart: unless-stopped
+    depends_on:
+      - redis_cache
+    command:
+      [
+        "uvicorn",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "main:app"
+      ]
+    ports:
+      - "8000:8000"
+    networks:
+      - net1
+
+  redis_cache:
+    image: redis:6.2.2-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    expose:
+      - "6379"
+    networks:
+      - net1
+
+volumes:
+  db_data: null
+  redis_data: null
+
+networks:
+  net1: null

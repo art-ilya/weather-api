@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "==0.70.0"
+httpx = "==0.21.1"
+aioredis = "==2.0.0"
+
+[dev-packages]
+pytest = "*"
+uvicorn = "*"
+pytz = "*"
+pytest-asyncio = "*"
+
+[requires]
+python_version = "3.7"
